@@ -135,7 +135,8 @@ padding = '=' * (4 - len(jwt_token) % 4)
 sub = json.loads(base64.b64decode(jwt_token + padding).decode())
 
 # Collect date and insert to the API
-date = datetime.now().strftime('%Y-%m-%d')
+# date = datetime.now().strftime('%Y-%m-%d')
+date = "2017-06-30"
 print(f"{colors.WARNING}Date: {date}{colors.ENDC}")
 response = requests.get(
     f"https://www.duolingo.com/{date}/users/{sub['sub']}?fields=fromLanguage,learningLanguage,xpGains",
@@ -211,7 +212,7 @@ for i in range(int(lessons)):
         'juicy': True,
         'learningLanguage': learningLanguage,
         'smartTipsVersion': 2,
-        'type': 'GLOBAL_PRACTIC',
+        'type': 'GLOBAL_PRACTICE',
     }
 
     session_response = requests.post(f'https://www.duolingo.com/{date}/sessions', json=session_data, headers=headers)
