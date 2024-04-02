@@ -142,7 +142,6 @@ response = requests.get(
     headers=headers,
 )
 data = response.json()
-print(data)
 # Take element required to make a request
 fromLanguage = data['fromLanguage']
 learningLanguage = data['learningLanguage']
@@ -212,7 +211,7 @@ for i in range(int(lessons)):
         'juicy': True,
         'learningLanguage': learningLanguage,
         'smartTipsVersion': 2,
-        'type': 'GLOBAL_PRACTICE',
+        'type': 'GLOBAL_PRACTIC',
     }
 
     session_response = requests.post(f'https://www.duolingo.com/{date}/sessions', json=session_data, headers=headers)
