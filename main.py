@@ -142,6 +142,7 @@ response = requests.get(
     headers=headers,
 )
 data = response.json()
+print(data)
 # Take element required to make a request
 fromLanguage = data['fromLanguage']
 learningLanguage = data['learningLanguage']
