@@ -86,9 +86,9 @@ def create_config() -> None:
         token = getpass(f"{colors.WHITE}Token: {colors.ENDC}")
         config.set('User', 'TOKEN', f"{token}")
         lessons = getpass(f"{colors.WHITE}Lesson: {colors.ENDC}")
-        config.set('User', 'LESSONS', f"{lessons}")
         lessonType = getpass(f"{colors.WHITE}Lesson Type (Skill/Practice): {colors.ENDC}")
-        config.set('User', 'LESSON_TYPE', f"{lessonType}")
+    config.set('User', 'LESSONS', f"{lessons}")
+    config.set('User', 'LESSON_TYPE', f"{lessonType}")
     with open(config_path, 'w', encoding='utf-8') as configfile:
         configfile.truncate(0)
         configfile.seek(0)
