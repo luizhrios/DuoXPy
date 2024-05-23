@@ -87,6 +87,8 @@ def create_config() -> None:
         config.set('User', 'TOKEN', f"{token}")
         lessons = getpass(f"{colors.WHITE}Lesson: {colors.ENDC}")
         lessonType = getpass(f"{colors.WHITE}Lesson Type (Skill/Practice): {colors.ENDC}")
+    print("env")
+    print(os.environ)
     config.set('User', 'LESSONS', f"{lessons}")
     config.set('User', 'LESSON_TYPE', f"{lessonType}")
     with open(config_path, 'w', encoding='utf-8') as configfile:
@@ -118,6 +120,7 @@ try:
     token = config.get('User', 'TOKEN')
     lessons = config.get('User', 'LESSONS')
     lessonType = config.get('User', 'LESSON_TYPE')
+    print("Lesson-Type", config.get('User', 'LESSON_TYPE'))
 except:
     create_config()
 

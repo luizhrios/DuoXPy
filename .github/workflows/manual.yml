@@ -5,7 +5,7 @@ on:
       lesson-type:
         default: "Practice"
         description: 'Type of lesson'
-        required: false
+        required: true
         type: choice
         options:
           - "Skill"
@@ -13,7 +13,7 @@ on:
       lessons:
         default: 1
         description: 'Number of lessons'
-        required: false
+        required: true
         type: number
    
 jobs:
