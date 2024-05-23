@@ -43,7 +43,7 @@ if os.getenv('GITHUB_ACTIONS') == 'true':
     print(f"{colors.WHITE}Current repo: {os.getenv('GITHUB_REPOSITORY')}{colors.ENDC}")
     # Check repo commit 
     user_repo = os.getenv('GITHUB_REPOSITORY')
-    ORIGINAL_REPO = 'gorouflex/DuoXPy'
+    ORIGINAL_REPO = 'Kdragonxx/DuoXPy'
     user_url = f'https://api.github.com/repos/{user_repo}/commits?path=main.py'
     original_url = f'https://api.github.com/repos/{ORIGINAL_REPO}/commits?path=main.py'
     user_response = requests.get(user_url, timeout=10000)
@@ -81,11 +81,14 @@ def create_config() -> None:
         token = os.getenv('JWT_TOKEN')
         config.set('User', 'TOKEN', f"{token}")
         lessons = os.getenv('LESSONS')
+        lessonType = os.getenv('LESSON-TYPE')
     else:
         token = getpass(f"{colors.WHITE}Token: {colors.ENDC}")
         config.set('User', 'TOKEN', f"{token}")
         lessons = getpass(f"{colors.WHITE}Lesson: {colors.ENDC}")
-    config.set('User', 'LESSONS', f"{lessons}")
+        config.set('User', 'LESSONS', f"{lessons}")
+        lessonType = getpass(f"{colors.WHITE}Lesson Type (Skill/Practice): {colors.ENDC}")
+        config.set('User', 'LESSON_TYPE', f"{lessonType}")
     with open(config_path, 'w', encoding='utf-8') as configfile:
         configfile.truncate(0)
         configfile.seek(0)
@@ -114,6 +117,7 @@ config.read(config_path)
 try:
     token = config.get('User', 'TOKEN')
     lessons = config.get('User', 'LESSONS')
+    lessonType = config.get('User', 'LESSON_TYPE')
 except:
     create_config()
 
@@ -212,7 +216,7 @@ for i in range(int(lessons)):
         'juicy': True,
         'learningLanguage': learningLanguage,
         'smartTipsVersion': 2,
-        'type': 'GLOBAL_PRACTICE',
+        'type': 'GLOBAL_PRACTICE'
     }
 
     session_response = requests.post(f'https://www.duolingo.com/{date}/sessions', json=session_data, headers=headers)

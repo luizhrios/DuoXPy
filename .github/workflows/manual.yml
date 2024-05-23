@@ -2,6 +2,14 @@ name: Manual lessons trigger
 on:
   workflow_dispatch:
     inputs:
+      lesson-type:
+        default: "Practice"
+        description: 'Type of lesson'
+        required: false
+        type: choice
+        options:
+          - "Skill"
+          - "Practice"
       lessons:
         default: 1
         description: 'Number of lessons'
