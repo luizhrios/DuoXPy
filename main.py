@@ -81,7 +81,7 @@ def create_config() -> None:
         token = os.getenv('JWT_TOKEN')
         config.set('User', 'TOKEN', f"{token}")
         lessons = os.getenv('LESSONS')
-        lessonType = os.getenv('LESSON_TYPE')
+        lessonType = os.getenv('LESSON-TYPE')
     else:
         token = getpass(f"{colors.WHITE}Token: {colors.ENDC}")
         config.set('User', 'TOKEN', f"{token}")

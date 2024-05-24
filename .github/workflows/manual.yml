@@ -26,3 +26,4 @@ jobs:
         env:
           JWT_TOKEN: ${{ secrets.JWT_TOKEN }}
           LESSONS: ${{ inputs.lessons }}
+          LESSON-TYPE: ${{ inputs.lesson-type }}
