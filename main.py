@@ -12,6 +12,7 @@ import shutil
 from configparser import ConfigParser
 from getpass import getpass
 from datetime import datetime
+import random
 
 # Define ANSI escape code, i don't want to use colorama since i cannot figure how to make it works on cross-platform
 class colors:
@@ -32,6 +33,9 @@ config_path: str = f'{config_folder}/DuoXPyConfig.txt'
 
 config: ConfigParser = ConfigParser()
 config.read(config_path)
+
+if os.getenv('LESSONS') == '0':
+    os.environ['LESSONS'] = str(random.randint(1, 100))
 
 # Print information window
 print(f"{colors.WARNING}------- Welcome to DuoXPy -------{colors.ENDC}")

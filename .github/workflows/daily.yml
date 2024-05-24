@@ -13,5 +13,5 @@ jobs:
         run: python main.py
         env:
           JWT_TOKEN: ${{ secrets.JWT_TOKEN }}
-          LESSONS: 10
+          LESSONS: 0
           LESSON-TYPE: Practice
