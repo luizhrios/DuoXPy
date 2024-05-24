@@ -81,11 +81,14 @@ def create_config() -> None:
         token = os.getenv('JWT_TOKEN')
         config.set('User', 'TOKEN', f"{token}")
         lessons = os.getenv('LESSONS')
+        lessonType = os.getenv('LESSON-TYPE')
     else:
         token = getpass(f"{colors.WHITE}Token: {colors.ENDC}")
         config.set('User', 'TOKEN', f"{token}")
         lessons = getpass(f"{colors.WHITE}Lesson: {colors.ENDC}")
+        lessonType = getpass(f"{colors.WHITE}Lesson Type (Skill/Practice): {colors.ENDC}")
     config.set('User', 'LESSONS', f"{lessons}")
+    config.set('User', 'LESSON_TYPE', f"{lessonType}")
     with open(config_path, 'w', encoding='utf-8') as configfile:
         configfile.truncate(0)
         configfile.seek(0)
@@ -114,6 +117,7 @@ config.read(config_path)
 try:
     token = config.get('User', 'TOKEN')
     lessons = config.get('User', 'LESSONS')
+    lessonType = config.get('User', 'LESSON_TYPE')
 except:
     create_config()
 
@@ -159,7 +163,7 @@ skillId = next(
 print(f"From (Language): {fromLanguage}")
 print(f"Learning (Language): {learningLanguage}")
 
-if skillId is None:
+if skillId is None and lessonType == 'Skill':
     print(f"{colors.FAIL}{colors.WARNING}--------- Traceback log ---------{colors.ENDC}\nNo skillId found in xpGains\nPlease do at least 1 or some lessons in your skill tree\nVisit https://github.com/gorouflex/DuoXPy#how-to-fix-error-500---no-skillid-found-in-xpgains for more information{colors.ENDC}")
     exit(1)
 
@@ -212,10 +216,13 @@ for i in range(int(lessons)):
         'isV2': True,
         'juicy': True,
         'learningLanguage': learningLanguage,
-        'skillId': skillId,
         'smartTipsVersion': 2,
-        'type': 'SPEAKING_PRACTICE',
     }
+    if lessonType == 'Skill':
+        session_data['skillId'] = skillId
+        session_data['type'] = 'SPEAKING_PRACTICE'
+    elif lessonType == 'Practice':
+        session_data['type'] = 'GLOBAL_PRACTICE'
 
     session_response = requests.post(f'https://www.duolingo.com/{date}/sessions', json=session_data, headers=headers)
     if session_response.status_code == 500:

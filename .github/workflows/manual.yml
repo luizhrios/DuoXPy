@@ -2,10 +2,18 @@ name: Manual lessons trigger
 on:
   workflow_dispatch:
     inputs:
+      lesson-type:
+        default: "Practice"
+        description: 'Type of lesson'
+        required: true
+        type: choice
+        options:
+          - "Skill"
+          - "Practice"
       lessons:
         default: 1
         description: 'Number of lessons'
-        required: false
+        required: true
         type: number
    
 jobs:
@@ -18,3 +26,4 @@ jobs:
         env:
           JWT_TOKEN: ${{ secrets.JWT_TOKEN }}
           LESSONS: ${{ inputs.lessons }}
+          LESSON-TYPE: ${{ inputs.lesson-type }}
