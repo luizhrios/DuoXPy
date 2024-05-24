@@ -87,8 +87,6 @@ def create_config() -> None:
         config.set('User', 'TOKEN', f"{token}")
         lessons = getpass(f"{colors.WHITE}Lesson: {colors.ENDC}")
         lessonType = getpass(f"{colors.WHITE}Lesson Type (Skill/Practice): {colors.ENDC}")
-    print("env")
-    print(os.environ)
     config.set('User', 'LESSONS', f"{lessons}")
     config.set('User', 'LESSON_TYPE', f"{lessonType}")
     with open(config_path, 'w', encoding='utf-8') as configfile:
@@ -120,7 +118,6 @@ try:
     token = config.get('User', 'TOKEN')
     lessons = config.get('User', 'LESSONS')
     lessonType = config.get('User', 'LESSON_TYPE')
-    print("Lesson-Type", config.get('User', 'LESSON_TYPE'))
 except:
     create_config()
 
@@ -167,7 +164,9 @@ skillId = next(
 print(f"From (Language): {fromLanguage}")
 print(f"Learning (Language): {learningLanguage}")
 
-print(date)
+if skillId is None and lessonType == 'Skill':
+    print(f"{colors.FAIL}{colors.WARNING}--------- Traceback log ---------{colors.ENDC}\nNo skillId found in xpGains\nPlease do at least 1 or some lessons in your skill tree\nVisit https://github.com/gorouflex/DuoXPy#how-to-fix-error-500---no-skillid-found-in-xpgains for more information{colors.ENDC}")
+    exit(1)
 
 # Do a loop and start make request to gain xp
 for i in range(int(lessons)):
@@ -219,8 +218,12 @@ for i in range(int(lessons)):
         'juicy': True,
         'learningLanguage': learningLanguage,
         'smartTipsVersion': 2,
-        'type': 'GLOBAL_PRACTICE'
     }
+    if lessonType == 'Skill':
+        session_data['skillId'] = skillId
+        session_data['type'] = 'SPEAKING_PRACTICE'
+    elif lessonType == 'Practice':
+        session_data['type'] = 'GLOBAL_PRACTICE'
 
     session_response = requests.post(f'https://www.duolingo.com/{date}/sessions', json=session_data, headers=headers)
     if session_response.status_code == 500:
