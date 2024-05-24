@@ -60,11 +60,14 @@ if os.getenv('GITHUB_ACTIONS') == 'true':
     else:
         print(f"{colors.WARNING}--------- Traceback log ---------{colors.ENDC}\n{colors.FAIL}❌ Error code 4: Failed to fetch commit information\nPlease refer to: https://github.com/gorouflex/HoneygainPot/blob/main/Docs/Debug.md for more information\nOr create an Issue on GitHub if it still doesn't work for you.{colors.ENDC}")
     print(f"{colors.WARNING}Lessons: {os.getenv('LESSONS')}{colors.ENDC}")
+    print(f"{colors.WARNING}Lesson Type: {os.getenv('LESSON-TYPE')}{colors.ENDC}")
 else:
     print(f"{colors.FAIL}Run with GitHub Actions: No{colors.ENDC}")
     try:
         lessons = config.get('User', 'LESSONS')
         print(f"{colors.WARNING}Lessons: {lessons}{colors.ENDC}")
+        lessonType = config.get('User', 'LESSON_TYPE')
+        print(f"{colors.WARNING}Lesson Type: {lessonType}{colors.ENDC}")
     except:
         print(f"{colors.WARNING}Lessons: N/A{colors.ENDC}")
 print(f"{colors.WHITE}Codename: Sandy{colors.ENDC}")
@@ -81,11 +84,14 @@ def create_config() -> None:
         token = os.getenv('JWT_TOKEN')
         config.set('User', 'TOKEN', f"{token}")
         lessons = os.getenv('LESSONS')
+        lessonType = os.getenv('LESSON-TYPE')
     else:
         token = getpass(f"{colors.WHITE}Token: {colors.ENDC}")
         config.set('User', 'TOKEN', f"{token}")
         lessons = getpass(f"{colors.WHITE}Lesson: {colors.ENDC}")
+        lessonType = getpass(f"{colors.WHITE}Lesson Type (Skill/Practice): {colors.ENDC}")
     config.set('User', 'LESSONS', f"{lessons}")
+    config.set('User', 'LESSON_TYPE', f"{lessonType}")
     with open(config_path, 'w', encoding='utf-8') as configfile:
         configfile.truncate(0)
         configfile.seek(0)
@@ -114,6 +120,7 @@ config.read(config_path)
 try:
     token = config.get('User', 'TOKEN')
     lessons = config.get('User', 'LESSONS')
+    lessonType = config.get('User', 'LESSON_TYPE')
 except:
     create_config()
 
@@ -159,7 +166,7 @@ skillId = next(
 print(f"From (Language): {fromLanguage}")
 print(f"Learning (Language): {learningLanguage}")
 
-if skillId is None:
+if skillId is None and lessonType == 'Skill':
     print(f"{colors.FAIL}{colors.WARNING}--------- Traceback log ---------{colors.ENDC}\nNo skillId found in xpGains\nPlease do at least 1 or some lessons in your skill tree\nVisit https://github.com/gorouflex/DuoXPy#how-to-fix-error-500---no-skillid-found-in-xpgains for more information{colors.ENDC}")
     exit(1)
 
@@ -212,10 +219,13 @@ for i in range(int(lessons)):
         'isV2': True,
         'juicy': True,
         'learningLanguage': learningLanguage,
-        'skillId': skillId,
         'smartTipsVersion': 2,
-        'type': 'SPEAKING_PRACTICE',
     }
+    if lessonType == 'Skill':
+        session_data['skillId'] = skillId
+        session_data['type'] = 'SPEAKING_PRACTICE'
+    elif lessonType == 'Practice':
+        session_data['type'] = 'GLOBAL_PRACTICE'
 
     session_response = requests.post(f'https://www.duolingo.com/{date}/sessions', json=session_data, headers=headers)
     if session_response.status_code == 500:
