@@ -1,0 +1,4 @@
+[User]
+token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjYzMDcyMDAwMDAsImlhdCI6MCwic3ViIjoyMzA1MDE5NDZ9.bNoFo6O-rDfD_gsjzYbnvDNpv8lzspWWRpbIr1nM6ds
+lessons = 1
+lesson_type = Practice
