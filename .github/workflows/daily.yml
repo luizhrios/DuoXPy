@@ -5,7 +5,7 @@ on:
 
    
 jobs:
-  Manual:
+  Daily:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4    
