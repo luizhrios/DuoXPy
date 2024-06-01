@@ -1,11 +1,9 @@
 <p align="center">
 <img src="https://github.com/gorouflex/Sandy/blob/main/Img/DuoXPy/duo.svg" width="20%"/>
 </p>
-<p align="center">
-<h1>DuoXPy - Project Sandy</h1>
-<h3>⚡️ XP farm and Streak keeper for Duolingo</h3>
-<h4>Powered by GitHub Actions 🐙 and Python 🐍</h5>
-</p>
+<h1 align="center">DuoXPy - Project Sandy</h1>
+<h3 align="center">⚡️ XP farm and Streak keeper for Duolingo</h3>
+<h4 align="center">Powered by GitHub Actions 🐙 and Python 🐍</h5>
 
 #
 
