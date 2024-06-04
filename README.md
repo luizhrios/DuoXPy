@@ -13,7 +13,7 @@
 </p>
 <p align="center">
   <a href="https://github.com/luizhrios/DuoXPy/actions/workflows/daily.yml"><img src="https://github.com/luizhrios/DuoXPy/actions/workflows/daily.yml/badge.svg"></a>
-  <a href="https://github.com/luizhrios/DuoXPy/actions/workflows/manual.yml"><img src="https://github.com/luizhrios/DuoXPy/actions/workflows/manual.yml/badge.svg"></a> (*)
+  <a href="https://github.com/luizhrios/DuoXPy/actions/workflows/manual.yml"><img src="https://github.com/luizhrios/DuoXPy/actions/workflows/manual.yml/badge.svg"></a>
 </p>
   
 # Feature 

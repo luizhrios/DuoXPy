@@ -39,7 +39,7 @@ if os.getenv('LESSONS') == '0':
 
 # Print information window
 print(f"{colors.WARNING}------- Welcome to DuoXPy -------{colors.ENDC}")
-print(f"{colors.OKBLUE}Made by GFx{colors.ENDC}")
+print(f"{colors.OKBLUE}Made by luizhrios{colors.ENDC}")
 # If this script were on GitHub Actions
 if os.getenv('GITHUB_ACTIONS') == 'true':
     print(f"{colors.OKBLUE}Powered by GitHub Actions V3 and Python{colors.ENDC}")
